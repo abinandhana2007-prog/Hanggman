@@ -1,0 +1,1091 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi games center - Your Gaming Hub</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient to right, #4b0082, #800080; /* Deep purple gradient */
+      color: #e0e0e0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #28004d; /* Darker purple */
+      padding: 20px 0;
+      border-bottom: 5px solid #a020f0; /* Medium purple */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 3.5em;
+      color: #ffebcd; /* Blanched almond */
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+      margin-bottom: 10px;
+    }
+
+    p.tagline {
+      font-size: 1.2em;
+      color: #d8bfd8; /* Thistle */
+      margin-top: 0;
+    }
+
+    .game-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 20px auto;
+      background-color: rgba(0, 0, 0, 0.3); /* Slightly transparent background */
+      border-radius: 15px;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .game-card {
+      background-color: #330066; /* Dark purple */
+      border: 2px solid #a020f0;
+      border-radius: 10px;
+      width: 300px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .game-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 10px 25px rgba(160, 32, 240, 0.6);
+    }
+
+    .game-card h2 {
+      color: #ffebcd;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .game-card .play-button {
+      background-color: #a020f0; /* Medium purple */
+      color: white;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .game-card .play-button:hover {
+      background-color: #8a00d9; /* Darker medium purple */
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px 0;
+      background-color: #28004d;
+      border-top: 5px solid #a020f0;
+      color: #d8bfd8;
+      font-size: 0.9em;
+    }
+
+    /* Individual game styles (minimized for brevity, add full game code to sections below) */
+    .game-section {
+      display: none; /* Hidden by default */
+      padding: 20px;
+      text-align: center;
+      background-color: #1a0033; /* Even darker purple for game backgrounds */
+      margin: 20px auto;
+      border-radius: 10px;
+      max-width: 800px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+      position: relative; /* For the back button */
+    }
+
+    .game-section h1 {
+      color: #ffebcd;
+      margin-bottom: 20px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background-color: #a020f0;
+      color: white;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9em;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #8a00d9;
+    }
+
+    /* Specific game styles to ensure they fit */
+    #hangman .canvas, #space-shooter .canvas, #tic-tac-toe .canvas, #flappy-bird .canvas, #tetris .canvas, #snake .canvas {
+      border: 1px solid black; /* Adjust as per original game styles */
+      margin: 20px auto;
+      display: block;
+    }
+
+    #tic-tac-toe #game {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 5px;
+      margin: 20px auto; /* Center the Tic-Tac-Toe grid */
+      width: fit-content;
+    }
+
+    #tic-tac-toe .cell {
+      background: #444;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎮 Multi Game center  👾</h1>
+    <p class="tagline"> Play for Victory </p>
+  </header>
+
+  <main id="main-content">
+    <section id="game-selection" class="game-container">
+      <div class="game-card" onclick="showGame('hangman')">
+        <h2>Hangman</h2>
+        <button class="play-button">Play Now!</button>
+      </div>
+      <div class="game-card" onclick="showGame('space-shooter')">
+        <h2>Space Shooter</h2>
+        <button class="play-button">Play Now!</button>
+      </div>
+      <div class="game-card" onclick="showGame('tic-tac-toe')">
+        <h2>Tic-Tac-Toe</h2>
+        <button class="play-button">Play Now!</button>
+      </div>
+      <div class="game-card" onclick="showGame('flappy-bird')">
+        <h2>Flappy Bird</h2>
+        <button class="play-button">Play Now!</button>
+      </div>
+      <div class="game-card" onclick="showGame('tetris')">
+        <h2>Tetris</h2>
+        <button class="play-button">Play Now!</button>
+      </div>
+      <div class="game-card" onclick="showGame('snake')">
+        <h2>Snake</h2>
+        <button class="play-button">Play Now!</button>
+      </div>
+    </section>
+
+    <section id="hangman" class="game-section">
+      <button class="back-button" onclick="hideGame('hangman')">Back to Games</button>
+      <h1>Hangman Game</h1>
+      <canvas id="hangmanCanvas" width="200" height="250"></canvas>
+      <div id="word"></div>
+      <div id="letters"></div>
+      <div id="message"></div>
+
+      <script>
+        // Hangman Game Script
+        const hangmanWords = ["javascript", "hangman", "programming", "developer", "openai"];
+        let hangmanWord;
+        let hangmanGuessedWord;
+        let hangmanWrongGuesses;
+        const hangmanMaxWrong = 6;
+        let hangmanMessageDiv;
+        let hangmanWordDiv;
+        let hangmanLettersDiv;
+        let hangmanCanvas;
+        let hangmanCtx;
+
+        function initHangman() {
+          hangmanWord = hangmanWords[Math.floor(Math.random() * hangmanWords.length)];
+          hangmanGuessedWord = Array(hangmanWord.length).fill("_");
+          hangmanWrongGuesses = 0;
+          hangmanMessageDiv = document.querySelector("#hangman #message");
+          hangmanWordDiv = document.querySelector("#hangman #word");
+          hangmanLettersDiv = document.querySelector("#hangman #letters");
+          hangmanCanvas = document.getElementById("hangmanCanvas");
+          hangmanCtx = hangmanCanvas.getContext("2d");
+
+          hangmanMessageDiv.textContent = "";
+          hangmanLettersDiv.innerHTML = "";
+          updateHangmanWord();
+          createHangmanLetters();
+          drawHangman();
+        }
+
+        function updateHangmanWord() {
+          hangmanWordDiv.textContent = hangmanGuessedWord.join(" ");
+        }
+
+        function drawHangman() {
+          hangmanCtx.clearRect(0, 0, hangmanCanvas.width, hangmanCanvas.height);
+          // Draw base
+          hangmanCtx.beginPath();
+          hangmanCtx.moveTo(10, 240);
+          hangmanCtx.lineTo(190, 240);
+          hangmanCtx.moveTo(50, 240);
+          hangmanCtx.lineTo(50, 20);
+          hangmanCtx.lineTo(150, 20);
+          hangmanCtx.lineTo(150, 40);
+          hangmanCtx.stroke();
+
+          if (hangmanWrongGuesses > 0) { // head
+            hangmanCtx.beginPath();
+            hangmanCtx.arc(150, 60, 20, 0, Math.PI * 2);
+            hangmanCtx.stroke();
+          }
+          if (hangmanWrongGuesses > 1) { // body
+            hangmanCtx.beginPath();
+            hangmanCtx.moveTo(150, 80);
+            hangmanCtx.lineTo(150, 150);
+            hangmanCtx.stroke();
+          }
+          if (hangmanWrongGuesses > 2) { // left arm
+            hangmanCtx.beginPath();
+            hangmanCtx.moveTo(150, 100);
+            hangmanCtx.lineTo(120, 130);
+            hangmanCtx.stroke();
+          }
+          if (hangmanWrongGuesses > 3) { // right arm
+            hangmanCtx.beginPath();
+            hangmanCtx.moveTo(150, 100);
+            hangmanCtx.lineTo(180, 130);
+            hangmanCtx.stroke();
+          }
+          if (hangmanWrongGuesses > 4) { // left leg
+            hangmanCtx.beginPath();
+            hangmanCtx.moveTo(150, 150);
+            hangmanCtx.lineTo(120, 190);
+            hangmanCtx.stroke();
+          }
+          if (hangmanWrongGuesses > 5) { // right leg
+            hangmanCtx.beginPath();
+            hangmanCtx.moveTo(150, 150);
+            hangmanCtx.lineTo(180, 190);
+            hangmanCtx.stroke();
+          }
+        }
+
+        function createHangmanLetters() {
+          for (let i = 65; i <= 90; i++) {
+            const button = document.createElement("button");
+            button.textContent = String.fromCharCode(i);
+            button.addEventListener("click", () => handleHangmanGuess(button.textContent.toLowerCase(), button));
+            hangmanLettersDiv.appendChild(button);
+          }
+        }
+
+        function handleHangmanGuess(letter, button) {
+          button.disabled = true;
+          if (hangmanWord.includes(letter)) {
+            for (let i = 0; i < hangmanWord.length; i++) {
+              if (hangmanWord[i] === letter) {
+                hangmanGuessedWord[i] = letter;
+              }
+            }
+            updateHangmanWord();
+            if (!hangmanGuessedWord.includes("_")) {
+              hangmanMessageDiv.textContent = "Congratulations! You won!";
+              disableAllHangmanButtons();
+            }
+          } else {
+            hangmanWrongGuesses++;
+            drawHangman();
+            if (hangmanWrongGuesses === hangmanMaxWrong) {
+              hangmanMessageDiv.textContent = `Game Over! The word was "${hangmanWord}".`;
+              disableAllHangmanButtons();
+            }
+          }
+        }
+
+        function disableAllHangmanButtons() {
+          const buttons = hangmanLettersDiv.querySelectorAll("button");
+          buttons.forEach(btn => btn.disabled = true);
+        }
+      </script>
+    </section>
+
+    <section id="space-shooter" class="game-section">
+      <button class="back-button" onclick="hideGame('space-shooter')">Back to Games</button>
+      <h1>Space Shooter Game</h1>
+      <div id="score">Score: 0</div>
+      <canvas id="spaceShooterCanvas" width="400" height="600"></canvas>
+
+      <script>
+        // Space Shooter Game Script
+        const spaceShooterCanvas = document.getElementById("spaceShooterCanvas");
+        const spaceShooterCtx = spaceShooterCanvas.getContext("2d");
+        const spaceShooterScoreDiv = document.querySelector("#space-shooter #score");
+
+        let spaceShooterSpaceship = {
+          x: spaceShooterCanvas.width / 2 - 20,
+          y: spaceShooterCanvas.height - 60,
+          width: 40,
+          height: 40,
+          speed: 5
+        };
+
+        let spaceShooterBullets = [];
+        let spaceShooterEnemies = [];
+        let spaceShooterScore = 0;
+        let spaceShooterGameOver = false;
+        let spaceShooterEnemyInterval;
+        let spaceShooterGameLoopId;
+        let spaceShooterKeyDownHandler;
+
+        function initSpaceShooter() {
+          spaceShooterSpaceship = {
+            x: spaceShooterCanvas.width / 2 - 20,
+            y: spaceShooterCanvas.height - 60,
+            width: 40,
+            height: 40,
+            speed: 5
+          };
+          spaceShooterBullets = [];
+          spaceShooterEnemies = [];
+          spaceShooterScore = 0;
+          spaceShooterGameOver = false;
+          spaceShooterScoreDiv.textContent = "Score: 0";
+
+          if (spaceShooterEnemyInterval) clearInterval(spaceShooterEnemyInterval);
+          if (spaceShooterGameLoopId) cancelAnimationFrame(spaceShooterGameLoopId);
+          if (spaceShooterKeyDownHandler) document.removeEventListener("keydown", spaceShooterKeyDownHandler);
+
+          spaceShooterKeyDownHandler = (e) => {
+            if (e.code === "ArrowLeft" && spaceShooterSpaceship.x > 0) {
+              spaceShooterSpaceship.x -= spaceShooterSpaceship.speed;
+            } else if (e.code === "ArrowRight" && spaceShooterSpaceship.x + spaceShooterSpaceship.width < spaceShooterCanvas.width) {
+              spaceShooterSpaceship.x += spaceShooterSpaceship.speed;
+            } else if (e.code === "Space") {
+              spaceShooterBullets.push({ x: spaceShooterSpaceship.x + spaceShooterSpaceship.width / 2 - 2.5, y: spaceShooterSpaceship.y, width: 5, height: 10 });
+            }
+          };
+          document.addEventListener("keydown", spaceShooterKeyDownHandler);
+
+          spaceShooterEnemyInterval = setInterval(spawnSpaceShooterEnemy, 1000);
+          spaceShooterGameLoop();
+        }
+
+        function drawSpaceShooterSpaceship() {
+          spaceShooterCtx.fillStyle = "white";
+          spaceShooterCtx.fillRect(spaceShooterSpaceship.x, spaceShooterSpaceship.y, spaceShooterSpaceship.width, spaceShooterSpaceship.height);
+        }
+
+        function drawSpaceShooterBullets() {
+          spaceShooterCtx.fillStyle = "red";
+          spaceShooterBullets.forEach((bullet) => {
+            spaceShooterCtx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+          });
+        }
+
+        function drawSpaceShooterEnemies() {
+          spaceShooterCtx.fillStyle = "green";
+          spaceShooterEnemies.forEach((enemy) => {
+            spaceShooterCtx.fillRect(enemy.x, enemy.y, enemy.width, enemy.height);
+          });
+        }
+
+        function updateSpaceShooterBullets() {
+          spaceShooterBullets.forEach((bullet, index) => {
+            bullet.y -= 7;
+            if (bullet.y + bullet.height < 0) {
+              spaceShooterBullets.splice(index, 1);
+            }
+          });
+        }
+
+        function updateSpaceShooterEnemies() {
+          spaceShooterEnemies.forEach((enemy, index) => {
+            enemy.y += 2;
+            if (enemy.y + enemy.height > spaceShooterCanvas.height) {
+              spaceShooterGameOver = true;
+            }
+          });
+        }
+
+        function spawnSpaceShooterEnemy() {
+          let x = Math.random() * (spaceShooterCanvas.width - 30);
+          spaceShooterEnemies.push({ x: x, y: 0, width: 30, height: 30 });
+        }
+
+        function checkSpaceShooterCollisions() {
+          spaceShooterEnemies.forEach((enemy, eIndex) => {
+            spaceShooterBullets.forEach((bullet, bIndex) => {
+              if (
+                bullet.x < enemy.x + enemy.width &&
+                bullet.x + bullet.width > enemy.x &&
+                bullet.y < enemy.y + enemy.height &&
+                bullet.y + bullet.height > enemy.y
+              ) {
+                spaceShooterEnemies.splice(eIndex, 1);
+                spaceShooterBullets.splice(bIndex, 1);
+                spaceShooterScore += 10;
+                spaceShooterScoreDiv.textContent = "Score: " + spaceShooterScore;
+              }
+            });
+          });
+        }
+
+        function spaceShooterGameLoop() {
+          if (spaceShooterGameOver) {
+            spaceShooterCtx.fillStyle = "red";
+            spaceShooterCtx.font = "30px Arial";
+            spaceShooterCtx.fillText("Game Over", spaceShooterCanvas.width / 2 - 80, spaceShooterCanvas.height / 2);
+            return;
+          }
+
+          spaceShooterCtx.clearRect(0, 0, spaceShooterCanvas.width, spaceShooterCanvas.height);
+
+          drawSpaceShooterSpaceship();
+          drawSpaceShooterBullets();
+          drawSpaceShooterEnemies();
+          updateSpaceShooterBullets();
+          updateSpaceShooterEnemies();
+          checkSpaceShooterCollisions();
+
+          spaceShooterGameLoopId = requestAnimationFrame(spaceShooterGameLoop);
+        }
+      </script>
+    </section>
+
+    <section id="tic-tac-toe" class="game-section">
+      <button class="back-button" onclick="hideGame('tic-tac-toe')">Back to Games</button>
+      <h1>Tic Tac Toe vs Computer</h1>
+      <div id="message">Your turn: X</div>
+      <div id="game"></div>
+      <button onclick="resetTicTacToeGame()">Restart</button>
+
+      <script>
+        // Tic Tac Toe Game Script
+        const ticTacToeGameDiv = document.querySelector("#tic-tac-toe #game");
+        const ticTacToeMessageDiv = document.querySelector("#tic-tac-toe #message");
+        let ticTacToeBoard = ["", "", "", "", "", "", "", "", ""];
+        let ticTacToeGameOver = false;
+
+        function initTicTacToe() {
+          ticTacToeBoard = ["", "", "", "", "", "", "", "", ""];
+          ticTacToeGameOver = false;
+          ticTacToeMessageDiv.textContent = "Your turn: X";
+          createTicTacToeBoard();
+        }
+
+        function createTicTacToeBoard() {
+          ticTacToeGameDiv.innerHTML = "";
+          ticTacToeBoard.forEach((cell, index) => {
+            const cellDiv = document.createElement("div");
+            cellDiv.classList.add("cell");
+            cellDiv.textContent = cell;
+            cellDiv.addEventListener("click", () => playerTicTacToeMove(index));
+            ticTacToeGameDiv.appendChild(cellDiv);
+          });
+        }
+
+        function playerTicTacToeMove(index) {
+          if (ticTacToeBoard[index] === "" && !ticTacToeGameOver) {
+            ticTacToeBoard[index] = "X";
+            updateTicTacToeBoard();
+            if (checkTicTacToeWinner("X")) {
+              ticTacToeMessageDiv.textContent = "You win!";
+              ticTacToeGameOver = true;
+              return;
+            }
+            if (ticTacToeBoardFull()) {
+              ticTacToeMessageDiv.textContent = "It's a tie!";
+              ticTacToeGameOver = true;
+              return;
+            }
+            ticTacToeMessageDiv.textContent = "Computer's turn: O";
+            setTimeout(computerTicTacToeMove, 500);
+          }
+        }
+
+        function computerTicTacToeMove() {
+          let emptyIndices = ticTacToeBoard.map((val, idx) => val === "" ? idx : null).filter(val => val !== null);
+          if (emptyIndices.length === 0 || ticTacToeGameOver) return;
+          let randomIndex = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+          ticTacToeBoard[randomIndex] = "O";
+          updateTicTacToeBoard();
+          if (checkTicTacToeWinner("O")) {
+            ticTacToeMessageDiv.textContent = "Computer wins!";
+            ticTacToeGameOver = true;
+            return;
+          }
+          if (ticTacToeBoardFull()) {
+            ticTacToeMessageDiv.textContent = "It's a tie!";
+            ticTacToeGameOver = true;
+            return;
+          }
+          ticTacToeMessageDiv.textContent = "Your turn: X";
+        }
+
+        function updateTicTacToeBoard() {
+          const cells = ticTacToeGameDiv.querySelectorAll(".cell");
+          cells.forEach((cell, index) => {
+            cell.textContent = ticTacToeBoard[index];
+          });
+        }
+
+        function checkTicTacToeWinner(player) {
+          const winConditions = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+            [0, 4, 8], [2, 4, 6]            // Diagonals
+          ];
+          return winConditions.some(condition =>
+            condition.every(index => ticTacToeBoard[index] === player)
+          );
+        }
+
+        function ticTacToeBoardFull() {
+          return ticTacToeBoard.every(cell => cell !== "");
+        }
+
+        function resetTicTacToeGame() {
+          initTicTacToe();
+        }
+      </script>
+    </section>
+
+    <section id="flappy-bird" class="game-section">
+      <button class="back-button" onclick="hideGame('flappy-bird')">Back to Games</button>
+      <h1>Flappy Bird Clone</h1>
+      <div id="score">Score: 0</div>
+      <canvas id="flappyBirdCanvas" width="400" height="600"></canvas>
+
+      <script>
+        // Flappy Bird Game Script
+        const flappyBirdCanvas = document.getElementById("flappyBirdCanvas");
+        const flappyBirdCtx = flappyBirdCanvas.getContext("2d");
+        const flappyBirdScoreDiv = document.querySelector("#flappy-bird #score");
+
+        let flappyBirdBird;
+        let flappyBirdPipes;
+        let flappyBirdScore;
+        let flappyBirdGameOver;
+        let flappyBirdPipeInterval;
+        let flappyBirdGameLoopId;
+        let flappyBirdKeyDownHandler;
+        let flappyBirdRestartListener;
+
+        function initFlappyBird() {
+          flappyBirdBird = {
+            x: 50,
+            y: 150,
+            width: 30,
+            height: 30,
+            gravity: 0.6,
+            lift: -10,
+            velocity: 0
+          };
+          flappyBirdPipes = [];
+          flappyBirdScore = 0;
+          flappyBirdGameOver = false;
+          flappyBirdScoreDiv.textContent = "Score: 0";
+
+          if (flappyBirdPipeInterval) clearInterval(flappyBirdPipeInterval);
+          if (flappyBirdGameLoopId) cancelAnimationFrame(flappyBirdGameLoopId);
+          if (flappyBirdKeyDownHandler) document.removeEventListener("keydown", flappyBirdKeyDownHandler);
+          if (flappyBirdRestartListener) document.removeEventListener("keydown", flappyBirdRestartListener);
+
+          flappyBirdKeyDownHandler = (e) => {
+            if (e.code === "Space") {
+              flappyBirdBird.velocity = flappyBirdBird.lift;
+            }
+          };
+          document.addEventListener("keydown", flappyBirdKeyDownHandler);
+
+          flappyBirdPipeInterval = setInterval(createFlappyBirdPipe, 2000);
+          flappyBirdGameLoop();
+        }
+
+        function drawFlappyBirdBird() {
+          flappyBirdCtx.fillStyle = "yellow";
+          flappyBirdCtx.fillRect(flappyBirdBird.x, flappyBirdBird.y, flappyBirdBird.width, flappyBirdBird.height);
+        }
+
+        function updateFlappyBirdBird() {
+          flappyBirdBird.velocity += flappyBirdBird.gravity;
+          flappyBirdBird.y += flappyBirdBird.velocity;
+
+          if (flappyBirdBird.y + flappyBirdBird.height > flappyBirdCanvas.height) {
+            flappyBirdBird.y = flappyBirdCanvas.height - flappyBirdBird.height;
+            flappyBirdGameOver = true;
+          }
+          if (flappyBirdBird.y < 0) {
+            flappyBirdBird.y = 0;
+            flappyBirdBird.velocity = 0;
+          }
+        }
+
+        function createFlappyBirdPipe() {
+          let gap = 120;
+          let topHeight = Math.random() * (flappyBirdCanvas.height / 2);
+          let bottomY = topHeight + gap;
+          flappyBirdPipes.push({
+            x: flappyBirdCanvas.width,
+            width: 50,
+            top: topHeight,
+            bottom: flappyBirdCanvas.height - bottomY
+          });
+        }
+
+        function drawFlappyBirdPipes() {
+          flappyBirdCtx.fillStyle = "green";
+          flappyBirdPipes.forEach(pipe => {
+            flappyBirdCtx.fillRect(pipe.x, 0, pipe.width, pipe.top);
+            flappyBirdCtx.fillRect(pipe.x, flappyBirdCanvas.height - pipe.bottom, pipe.width, pipe.bottom);
+          });
+        }
+
+        function updateFlappyBirdPipes() {
+          flappyBirdPipes.forEach((pipe, index) => {
+            pipe.x -= 2;
+
+            // Collision detection
+            if (
+              flappyBirdBird.x < pipe.x + pipe.width &&
+              flappyBirdBird.x + flappyBirdBird.width > pipe.x &&
+              (flappyBirdBird.y < pipe.top || flappyBirdBird.y + flappyBirdBird.height > flappyBirdCanvas.height - pipe.bottom)
+            ) {
+              flappyBirdGameOver = true;
+            }
+
+            // Score update
+            if (pipe.x + pipe.width === flappyBirdBird.x) {
+              flappyBirdScore++;
+              flappyBirdScoreDiv.textContent = "Score: " + flappyBirdScore;
+            }
+
+            // Remove pipes off-screen
+            if (pipe.x + pipe.width < 0) {
+              flappyBirdPipes.splice(index, 1);
+            }
+          });
+        }
+
+        function flappyBirdGameLoop() {
+          if (flappyBirdGameOver) {
+            flappyBirdCtx.fillStyle = "red";
+            flappyBirdCtx.font = "40px Arial";
+            flappyBirdCtx.fillText("Game Over", flappyBirdCanvas.width / 2 - 100, flappyBirdCanvas.height / 2);
+            flappyBirdCtx.font = "20px Arial";
+            flappyBirdCtx.fillText("Press Space to Restart", flappyBirdCanvas.width / 2 - 110, flappyBirdCanvas.height / 2 + 40);
+
+            flappyBirdRestartListener = (e) => {
+              if (e.code === "Space" && flappyBirdGameOver) {
+                initFlappyBird();
+              }
+            };
+            document.addEventListener("keydown", flappyBirdRestartListener);
+            return;
+          }
+
+          flappyBirdCtx.clearRect(0, 0, flappyBirdCanvas.width, flappyBirdCanvas.height);
+
+          drawFlappyBirdBird();
+          drawFlappyBirdPipes();
+          updateFlappyBirdBird();
+          updateFlappyBirdPipes();
+
+          flappyBirdGameLoopId = requestAnimationFrame(flappyBirdGameLoop);
+        }
+      </script>
+    </section>
+
+    <section id="tetris" class="game-section">
+      <button class="back-button" onclick="hideGame('tetris')">Back to Games</button>
+      <h1>Tetris</h1>
+      <canvas id="tetrisCanvas" width="240" height="400"></canvas>
+      <script>
+        // Tetris Game Script
+        const tetrisCanvas = document.getElementById('tetrisCanvas');
+        const tetrisContext = tetrisCanvas.getContext('2d');
+        tetrisContext.scale(20, 20);
+
+        const tetrisColors = [
+          null,
+          '#FF0D72', // T
+          '#0DC2FF', // O
+          '#0DFF72', // L
+          '#F538FF', // J
+          '#FF8E0D', // I
+          '#FFE138', // S
+          '#3877FF'  // Z
+        ];
+
+        let tetrisArena;
+        let tetrisPlayer;
+        let tetrisDropCounter;
+        let tetrisDropInterval;
+        let tetrisLastTime;
+        let tetrisKeyDownHandler;
+        let tetrisAnimationFrameId;
+
+        function initTetris() {
+          tetrisArena = createTetrisMatrix(12, 20);
+          tetrisPlayer = {
+            pos: { x: 0, y: 0 },
+            matrix: null
+          };
+          tetrisDropCounter = 0;
+          tetrisDropInterval = 1000;
+          tetrisLastTime = 0;
+
+          if (tetrisAnimationFrameId) cancelAnimationFrame(tetrisAnimationFrameId);
+          if (tetrisKeyDownHandler) document.removeEventListener('keydown', tetrisKeyDownHandler);
+
+          tetrisKeyDownHandler = event => {
+            if (event.key === 'ArrowLeft') tetrisPlayerMove(-1);
+            else if (event.key === 'ArrowRight') tetrisPlayerMove(1);
+            else if (event.key === 'ArrowDown') tetrisPlayerDrop();
+            else if (event.key === 'q') tetrisPlayerRotate(-1);
+            else if (event.key === 'w') tetrisPlayerRotate(1);
+          };
+          document.addEventListener('keydown', tetrisKeyDownHandler);
+
+          tetrisPlayerReset();
+          tetrisUpdate();
+        }
+
+        function createTetrisMatrix(w, h) {
+          const matrix = [];
+          while (h--) matrix.push(new Array(w).fill(0));
+          return matrix;
+        }
+
+        function createTetrisPiece(type) {
+          switch (type) {
+            case 'T': return [[0, 0, 0], [1, 1, 1], [0, 1, 0]];
+            case 'O': return [[2, 2], [2, 2]];
+            case 'L': return [[0, 3, 0], [0, 3, 0], [0, 3, 3]];
+            case 'J': return [[0, 4, 0], [0, 4, 0], [4, 4, 0]];
+            case 'I': return [[0, 5, 0, 0], [0, 5, 0, 0], [0, 5, 0, 0], [0, 5, 0, 0]];
+            case 'S': return [[0, 6, 6], [6, 6, 0], [0, 0, 0]];
+            case 'Z': return [[7, 7, 0], [0, 7, 7], [0, 0, 0]];
+          }
+        }
+
+        function drawTetrisMatrix(matrix, offset) {
+          matrix.forEach((row, y) => {
+            row.forEach((value, x) => {
+              if (value !== 0) {
+                tetrisContext.fillStyle = tetrisColors[value];
+                tetrisContext.fillRect(x + offset.x, y + offset.y, 1, 1);
+              }
+            });
+          });
+        }
+
+        function drawTetris() {
+          tetrisContext.fillStyle = '#000';
+          tetrisContext.fillRect(0, 0, tetrisCanvas.width, tetrisCanvas.height);
+          drawTetrisMatrix(tetrisArena, { x: 0, y: 0 });
+          drawTetrisMatrix(tetrisPlayer.matrix, tetrisPlayer.pos);
+        }
+
+        function mergeTetris(arena, player) {
+          player.matrix.forEach((row, y) => {
+            row.forEach((value, x) => {
+              if (value !== 0) {
+                arena[y + player.pos.y][x + player.pos.x] = value;
+              }
+            });
+          });
+        }
+
+        function collideTetris(arena, player) {
+          const [m, o] = [player.matrix, player.pos];
+          for (let y = 0; y < m.length; ++y) {
+            for (let x = 0; x < m[y].length; ++x) {
+              if (m[y][x] !== 0 &&
+                  (arena[y + o.y] && arena[y + o.y][x + o.x]) !== 0) {
+                return true;
+              }
+            }
+          }
+          return false;
+        }
+
+        function tetrisPlayerDrop() {
+          tetrisPlayer.pos.y++;
+          if (collideTetris(tetrisArena, tetrisPlayer)) {
+            tetrisPlayer.pos.y--;
+            mergeTetris(tetrisArena, tetrisPlayer);
+            tetrisPlayerReset();
+            tetrisArenaSweep();
+          }
+          tetrisDropCounter = 0;
+        }
+
+        function tetrisPlayerMove(dir) {
+          tetrisPlayer.pos.x += dir;
+          if (collideTetris(tetrisArena, tetrisPlayer)) {
+            tetrisPlayer.pos.x -= dir;
+          }
+        }
+
+        function tetrisPlayerReset() {
+          const pieces = 'TJLOSZI';
+          tetrisPlayer.matrix = createTetrisPiece(pieces[Math.floor(Math.random() * pieces.length)]);
+          tetrisPlayer.pos.y = 0;
+          tetrisPlayer.pos.x = (tetrisArena[0].length / 2 | 0) - (tetrisPlayer.matrix[0].length / 2 | 0);
+          if (collideTetris(tetrisArena, tetrisPlayer)) {
+            tetrisArena.forEach(row => row.fill(0));
+            alert("Game Over");
+          }
+        }
+
+        function tetrisPlayerRotate(dir) {
+          const pos = tetrisPlayer.pos.x;
+          let offset = 1;
+          rotateTetris(tetrisPlayer.matrix, dir);
+          while (collideTetris(tetrisArena, tetrisPlayer)) {
+            tetrisPlayer.pos.x += offset;
+            offset = -(offset + (offset > 0 ? 1 : -1));
+            if (offset > tetrisPlayer.matrix[0].length) {
+              rotateTetris(tetrisPlayer.matrix, -dir);
+              tetrisPlayer.pos.x = pos;
+              return;
+            }
+          }
+        }
+
+        function rotateTetris(matrix, dir) {
+          for (let y = 0; y < matrix.length; ++y) {
+            for (let x = 0; x < y; ++x) {
+              [matrix[x][y], matrix[y][x]] = [matrix[y][x], matrix[x][y]];
+            }
+          }
+          if (dir > 0) matrix.forEach(row => row.reverse());
+          else matrix.reverse();
+        }
+
+        function tetrisArenaSweep() {
+          let rowCount = 1;
+          outer: for (let y = tetrisArena.length - 1; y >= 0; --y) {
+            for (let x = 0; x < tetrisArena[y].length; ++x) {
+              if (tetrisArena[y][x] === 0) continue outer;
+            }
+            const row = tetrisArena.splice(y, 1)[0].fill(0);
+            tetrisArena.unshift(row);
+            ++y;
+            // (You can add score update here)
+          }
+        }
+
+        function tetrisUpdate(time = 0) {
+          const deltaTime = time - tetrisLastTime;
+          tetrisLastTime = time;
+          tetrisDropCounter += deltaTime;
+          if (tetrisDropCounter > tetrisDropInterval) {
+            tetrisPlayerDrop();
+          }
+          drawTetris();
+          tetrisAnimationFrameId = requestAnimationFrame(tetrisUpdate);
+        }
+      </script>
+    </section>
+
+    <section id="snake" class="game-section">
+      <button class="back-button" onclick="hideGame('snake')">Back to Games</button>
+      <h1>🐍 Snake Game</h1>
+      <div id="score">Score: 0</div>
+      <canvas id="snakeGameCanvas" width="400" height="400"></canvas>
+      <button onclick="startSnakeGame()">Restart Game</button>
+
+      <script>
+        // Snake Game Script
+        const snakeCanvas = document.getElementById("snakeGameCanvas");
+        const snakeCtx = snakeCanvas.getContext("2d");
+        const snakeScoreDiv = document.querySelector("#snake #score");
+
+        const snakeGridSize = 20;
+        const snakeTileCount = snakeCanvas.width / snakeGridSize;
+
+        let snakeSnake = [];
+        let snakeDirection = 'right';
+        let snakeFood = {};
+        let snakeScore = 0;
+        let snakeGameLoopInterval;
+        let snakeKeyDownHandler;
+
+        function initSnake() {
+          snakeSnake = [
+            { x: 10, y: 10 },
+            { x: 9, y: 10 }
+          ];
+          snakeDirection = 'right';
+          snakeScore = 0;
+          snakeScoreDiv.textContent = "Score: 0";
+          placeSnakeFood();
+
+          if (snakeGameLoopInterval) clearInterval(snakeGameLoopInterval);
+          if (snakeKeyDownHandler) window.removeEventListener("keydown", snakeKeyDownHandler);
+
+          snakeKeyDownHandler = e => {
+            switch (e.key) {
+              case "ArrowUp": if (snakeDirection !== 'down') snakeDirection = 'up'; break;
+              case "ArrowDown": if (snakeDirection !== 'up') snakeDirection = 'down'; break;
+              case "ArrowLeft": if (snakeDirection !== 'right') snakeDirection = 'left'; break;
+              case "ArrowRight": if (snakeDirection !== 'left') snakeDirection = 'right'; break;
+            }
+          };
+          window.addEventListener("keydown", snakeKeyDownHandler);
+
+          snakeGameLoopInterval = setInterval(updateSnake, 100);
+        }
+
+        function updateSnake() {
+          const head = { ...snakeSnake[0] };
+
+          switch (snakeDirection) {
+            case 'right': head.x++; break;
+            case 'left': head.x--; break;
+            case 'up': head.y--; break;
+            case 'down': head.y++; break;
+          }
+
+          // Wall collision or self collision
+          if (
+            head.x < 0 || head.x >= snakeTileCount ||
+            head.y < 0 || head.y >= snakeTileCount ||
+            snakeSnake.some(segment => segment.x === head.x && segment.y === head.y)
+          ) {
+            clearInterval(snakeGameLoopInterval);
+            alert("Game Over! Your score: " + snakeScore);
+            return;
+          }
+
+          snakeSnake.unshift(head);
+
+          // Eat food
+          if (head.x === snakeFood.x && head.y === snakeFood.y) {
+            snakeScore++;
+            snakeScoreDiv.textContent = "Score: " + snakeScore;
+            placeSnakeFood();
+          } else {
+            snakeSnake.pop(); // Remove tail if not eating
+          }
+
+          drawSnakeGame();
+        }
+
+        function placeSnakeFood() {
+          snakeFood = {
+            x: Math.floor(Math.random() * snakeTileCount),
+            y: Math.floor(Math.random() * snakeTileCount)
+          };
+
+          // Avoid placing on the snake
+          if (snakeSnake.some(s => s.x === snakeFood.x && s.y === snakeFood.y)) {
+            placeSnakeFood();
+          }
+        }
+
+        function drawSnakeGame() {
+          // Clear
+          snakeCtx.fillStyle = "#222";
+          snakeCtx.fillRect(0, 0, snakeCanvas.width, snakeCanvas.height);
+
+          // Draw snake
+          snakeCtx.fillStyle = "#0f0";
+          for (let segment of snakeSnake) {
+            snakeCtx.fillRect(segment.x * snakeGridSize, segment.y * snakeGridSize, snakeGridSize, snakeGridSize);
+          }
+
+          // Draw food
+          snakeCtx.fillStyle = "#f00";
+          snakeCtx.fillRect(snakeFood.x * snakeGridSize, snakeFood.y * snakeGridSize, snakeGridSize, snakeGridSize);
+        }
+
+        function startSnakeGame() {
+          initSnake();
+        }
+      </script>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Arcade Haven. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Global functions to show/hide games
+    function showGame(gameId) {
+      document.getElementById('game-selection').style.display = 'none';
+      document.getElementById(gameId).style.display = 'block';
+
+      // Initialize the specific game when its section is shown
+      switch (gameId) {
+        case 'hangman':
+          initHangman();
+          break;
+        case 'space-shooter':
+          initSpaceShooter();
+          break;
+        case 'tic-tac-toe':
+          initTicTacToe();
+          break;
+        case 'flappy-bird':
+          initFlappyBird();
+          break;
+        case 'tetris':
+          initTetris();
+          break;
+        case 'snake':
+          initSnake();
+          break;
+      }
+    }
+
+    function hideGame(gameId) {
+      document.getElementById(gameId).style.display = 'none';
+      document.getElementById('game-selection').style.display = 'flex'; // Show game selection again
+
+      // Clear intervals/listeners when hiding a game to prevent conflicts
+      switch (gameId) {
+        case 'space-shooter':
+          clearInterval(spaceShooterEnemyInterval);
+          cancelAnimationFrame(spaceShooterGameLoopId);
+          document.removeEventListener("keydown", spaceShooterKeyDownHandler);
+          break;
+        case 'flappy-bird':
+          clearInterval(flappyBirdPipeInterval);
+          cancelAnimationFrame(flappyBirdGameLoopId);
+          document.removeEventListener("keydown", flappyBirdKeyDownHandler);
+          document.removeEventListener("keydown", flappyBirdRestartListener); // Clean up restart listener
+          break;
+        case 'tetris':
+          cancelAnimationFrame(tetrisAnimationFrameId);
+          document.removeEventListener('keydown', tetrisKeyDownHandler);
+          break;
+        case 'snake':
+          clearInterval(snakeGameLoopInterval);
+          window.removeEventListener("keydown", snakeKeyDownHandler);
+          break;
+      }
+    }
+  </script>
+
+</body>
+</html>
